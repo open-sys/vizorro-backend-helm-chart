@@ -35,7 +35,8 @@ spec:
           command: {{ .Values.containerCommand }}
           {{- end }}
           {{- if .Values.containerArgs }}
-          args: {{ .Values.containerArgs }}
+          args:
+          {{- toYaml .Values.containerArgs | nindent 12 }}
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
