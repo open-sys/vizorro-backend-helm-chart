@@ -27,7 +27,10 @@ spec:
           {{- toYaml .Values.securityContext | nindent 12 }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args: ["./DB/migrate"]
+        command: ["/usr/bin/sh"]
+        args:
+        - "-c"
+        - "cd DB && PGPASSWORD=$(STORAGE_PASS) PGPORT=$(STORAGE_PORT) /app/DB/migrate.sh $(STORAGE_SERVER) $(STORAGE_DB) $(STORAGE_USER)"
         envFrom:
         - secretRef:
             name: {{ .Release.Name }}-env
