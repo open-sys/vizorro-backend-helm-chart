@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   backend:
   - apiVersion: v2
+    created: "2021-12-25T09:35:29.474810353Z"
+    description: Helm Chart for Backend Services
+    digest: 75a377a52f069131b9bca0ce6166b3ab53e0efe7b526b0ef246c1eee857a0662
+    name: backend
+    type: application
+    urls:
+    - https://github.com/open-sys/vizorro-backend-helm-chart/releases/download/backend-1.0.0/backend-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     created: "2021-09-02T17:11:39.701395019Z"
     description: Helm Chart for Backend Services
     digest: 265ab06f0a152f2a8371a7b2052baffc42e0f14aa2a1a099014bfef2b29cf976
