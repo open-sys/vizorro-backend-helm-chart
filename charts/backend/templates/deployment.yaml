@@ -41,9 +41,11 @@ spec:
           {{- toYaml .Values.containerArgs | nindent 12 }}
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.env.existingSecret }}
           envFrom:
           - secretRef:
-              name: {{ .Release.Name }}-env
+              name: {{ .Values.env.existingSecret }}
+          {{- end }}
           {{- with .Values.containerPorts }}
           ports:
             {{- toYaml . | nindent 12 }}

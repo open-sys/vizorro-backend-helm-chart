@@ -8,7 +8,7 @@ metadata:
   annotations:
     "helm.sh/hook-weight": "5"
     "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation
 spec:
   backoffLimit: 4
   template:
@@ -31,7 +31,9 @@ spec:
         args:
         - "-c"
         - "cd DB && PGPASSWORD=$(STORAGE_PASS) PGPORT=$(STORAGE_PORT) /app/DB/migrate.sh $(STORAGE_SERVER) $(STORAGE_DB) $(STORAGE_USER)"
+        {{- if .Values.env.existingSecret }}
         envFrom:
         - secretRef:
-            name: {{ .Release.Name }}-env
+            name: {{ .Values.env.existingSecret }}
+        {{- end }}
 {{- end }}
